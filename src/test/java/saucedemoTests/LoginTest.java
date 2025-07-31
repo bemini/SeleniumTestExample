@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
     }
 
     @AfterTest
-    public void TearDown(){
+    public void tearDownTest(){
         super.tearDown(driver);
         if (driver != null) {
             driver.quit();
