@@ -39,7 +39,7 @@ public class LoginTest extends BaseTest {
         login(STANDARD_USER, PASSWORD);
         LoginPage.handlePasswordWarningIfPresent(driver);
 
-        $(".title").shouldHave(text("Products"));
+        $(PAGE_TITLE).shouldHave(text("Products"));
 
     }
 

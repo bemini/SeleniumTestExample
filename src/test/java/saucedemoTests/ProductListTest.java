@@ -3,7 +3,6 @@ package saucedemoTests;
 import framework.BaseTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,6 +11,8 @@ import org.testng.annotations.*;
 import java.time.Duration;
 import java.util.*;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$;
 import static framework.ConstantValues.*;
 import static framework.InventoryPage.*;
 import static framework.LoginPage.login;
@@ -37,7 +38,10 @@ public class ProductListTest extends BaseTest {
     //Check that the entire products list is captured
     @Test
     public void productListTest(){
+        //Check that we landed on the products page
+        $(PAGE_TITLE).shouldHave(text("Products"));
 
+        //The invetory list, key, value pair.
         Map<String,String> productslistMap = getProductNamesAndPrices(driver, INVENTORY_ITEMS);
 
         //Assert that all 6 products are pulled into the list
@@ -114,7 +118,6 @@ public class ProductListTest extends BaseTest {
 
     @Test
     public void sortAndAddToCartTest() throws InterruptedException {
-        // Login (already working)
 
         // Sort A-Z
         productSort(driver, "az");
@@ -132,16 +135,17 @@ public class ProductListTest extends BaseTest {
         productSort(driver, "hilo");
         addItemToCart(driver);
 
+        new WebDriverWait(driver, Duration.ofSeconds(5));
         // Assert cart has 4 items
-        String badgeCount = driver.findElement(By.className(SHOPPING_CART_BADGE)).getText();
-        Assert.assertEquals("Expected badge count = 4","4", badgeCount);
-        new WebDriverWait(driver, Duration.ofMillis(5000));
+        int badgeCount = getBadgeCount(driver);
+        Assert.assertEquals("Expected badge count = 4",4, badgeCount);
 
         removeItemFromCart(driver);
+        new WebDriverWait(driver, Duration.ofSeconds(5));
 
         // Assert cart has 3 items
-        String badgeCount2 = driver.findElement(By.className(SHOPPING_CART_BADGE)).getText();
-        Assert.assertEquals("Expected badge count = 3","3", badgeCount2);
+        int badgeCount2 = getBadgeCount(driver);
+        Assert.assertEquals("Expected badge count = 3",3, badgeCount2);
         new WebDriverWait(driver, Duration.ofMillis(3000));
     }
 }

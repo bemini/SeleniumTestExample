@@ -17,17 +17,11 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         WebDriverRunner.setWebDriver(driver); // bind to Selenide
 
-        // Disable Chrome credential service & safety check
-        options.addArguments("--disable-features=SafetyCheck");
-        options.addArguments("--disable-features=PasswordCheck");
-
         open(TARGET_URL);
-
     }
 
     public void tearDown(WebDriver driver){
         //Logout
         LoginPage.logout();
-        driver.close();
     }
 }

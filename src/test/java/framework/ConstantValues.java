@@ -6,6 +6,9 @@ public class ConstantValues {
     //Targeted URL
     public static final String TARGET_URL = "https://www.saucedemo.com/";
 
+    //General ID's
+    public static final String PAGE_TITLE = ".title";
+
     /*
      LOGIN PAGE
     */

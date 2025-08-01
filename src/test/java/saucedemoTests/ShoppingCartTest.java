@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -21,7 +21,7 @@ import static framework.ShoppingCartList.*;
 public class ShoppingCartTest extends BaseTest {
     WebDriver driver = new ChromeDriver();
 
-    @BeforeClass
+    @BeforeTest
     public void setupTest(){
         super.setUp(driver);
         login(STANDARD_USER, PASSWORD);
@@ -71,6 +71,4 @@ public class ShoppingCartTest extends BaseTest {
         //Check the total price off all cart items
         Assert.assertEquals("Expected total price = 0.00", 0.00, calculateTotalCartItemsPrice(prices), 0.01);
     }
-
-
 }

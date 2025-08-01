@@ -2,6 +2,7 @@ package framework;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.*;
 
@@ -37,11 +38,26 @@ public class ShoppingCartList {
         return totalItemPrice;
     }
 
+    public static void clickCheckout(WebDriver driver){
+        WebElement checkoutButton = driver.findElement(By.xpath("//button[text()='Checkout']"));
+        checkoutButton.click();
+    }
+
     public static double calculateTotal(List<Double>cartItemsList, Double taxRate){
         Double totalItemPrice = 0.00;
         for (Double price : cartItemsList){
             totalItemPrice += price;
         }
         return totalItemPrice * (1 + taxRate);
+    }
+
+    public static void clickCancleButton(WebDriver driver){
+        WebElement cancleButton = driver.findElement(By.xpath("//button[text()='Cancel']"));
+        cancleButton.click();
+    }
+
+    public static void clickContinueShopping(WebDriver driver){
+        WebElement continueShoppingButton = driver.findElement(By.xpath("//button[text()='Continue Shopping']"));
+        continueShoppingButton.click();
     }
 }

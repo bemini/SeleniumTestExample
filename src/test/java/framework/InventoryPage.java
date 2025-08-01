@@ -3,6 +3,7 @@ package framework;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -53,12 +54,14 @@ public class InventoryPage {
         return prices;
     }
 
-    // Click add to cart button.
+    //Click add to cart button.
     public static void addItemToCart(WebDriver driver) {
         driver.findElement(By.xpath("(//button[text()='Add to cart'])[1]")).click();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(SHOPPING_CART_BADGE)));
     }
 
-    // Iterate through the list and add them all to the shoping cart
+    //Iterate through the list and add them all to the shoping cart
     public static void addAllItemstoCart(WebDriver driver) {
         List<WebElement> addButts = driver.findElements(By.xpath("//button[text()='Add to cart']"));
         for (WebElement addButton : addButts) {
@@ -67,15 +70,26 @@ public class InventoryPage {
     }
 
     public static void removeItemFromCart(WebDriver driver) {
-        // Test removing 1 item from with in the products page, and re-check the badge count
+        //Test removing 1 item from with in the products page, and re-check the badge count
         By.xpath("(//button[text()='Remove'])[1]").findElement(driver).click();
     }
 
-    // Iterate through the list and remove them all to the shoping cart
+    //Iterate through the list and remove them all to the shoping cart
     public static void removeAllItemsFromCart(WebDriver driver) {
-        List<WebElement> removeButts = driver.findElements(By.xpath("//button[text()='Remove']"));
-        for (WebElement removeButton : removeButts) {
+        List<WebElement> removeButtons = driver.findElements(By.xpath("//button[text()='Remove']"));
+        for (WebElement removeButton : removeButtons) {
             removeButton.click();
         }
+    }
+
+    //Get badge count
+    public static int getBadgeCount(WebDriver driver){
+        WebElement badge = driver.findElement(By.className(SHOPPING_CART_BADGE));
+        if (badge.isDisplayed()){
+            return Integer.parseInt(badge.getText());
+        }
+
+        return 0;
+
     }
 }
