@@ -58,7 +58,7 @@ public class InventoryPage {
     public static void addItemToCart(WebDriver driver) {
         driver.findElement(By.xpath("(//button[text()='Add to cart'])[1]")).click();
         wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(SHOPPING_CART_BADGE)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(SHOPPING_CART_BADGE));
     }
 
     //Iterate through the list and add them all to the shoping cart
@@ -84,7 +84,7 @@ public class InventoryPage {
 
     //Get badge count
     public static int getBadgeCount(WebDriver driver){
-        WebElement badge = driver.findElement(By.className(SHOPPING_CART_BADGE));
+        WebElement badge = driver.findElement(SHOPPING_CART_BADGE);
         if (badge.isDisplayed()){
             return Integer.parseInt(badge.getText());
         }

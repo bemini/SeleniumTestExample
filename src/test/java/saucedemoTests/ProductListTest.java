@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
@@ -13,13 +16,17 @@ import java.util.*;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
+import static framework.BrowserOptions.options;
 import static framework.ConstantValues.*;
 import static framework.InventoryPage.*;
 import static framework.LoginPage.login;
 
 public class ProductListTest extends BaseTest {
 
-    WebDriver driver = new ChromeDriver();
+//    WebDriver driver = new FirefoxDriver();
+    WebDriver driver = new ChromeDriver(options());
+//    WebDriver driver = new EdgeDriver();
+//    WebDriver driver = new SafariDriver();
 
     @BeforeClass
     public void setupTest() {

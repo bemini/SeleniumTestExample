@@ -1,5 +1,7 @@
 package framework;
 
+import org.openqa.selenium.By;
+
 public class ConstantValues {
     private ConstantValues(){}
 
@@ -31,12 +33,12 @@ public class ConstantValues {
     public static final String INVENTORY_ITEM_PRICE = "inventory_item_price";
 
     //Shopping Cart Page ID's
-    public static final String SHOPPING_CART_BADGE = "shopping_cart_badge";
+    public static final By SHOPPING_CART_BADGE = By.className("shopping_cart_badge");
     public static final String SHOPPING_CART_ITEMS = "cart_item";
 
     //Accessible ID's on sidebar Menu
-    public static final String MENU_BUTTON = "#react-burger-menu-btn";
-    public static final String LOGOUT = "#logout_sidebar_link";
+    public static final By MENU_BUTTON = By.id("react-burger-menu-btn");
+    public static final String LOGOUT =  "//*[text()='Logout']";
 
 
 }

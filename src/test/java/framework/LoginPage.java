@@ -45,8 +45,12 @@ public class LoginPage {
     }
 
     //Logout
-    public static void logout(){
-        $(MENU_BUTTON).click();
-        $(LOGOUT).click();
+    public static void logout(WebDriver driver){
+        driver.findElement(MENU_BUTTON).click();
+        new WebDriverWait(driver, Duration.ofMillis(100));
+        WebElement logoutButton = driver.findElement(By.xpath("//*[text()='Logout']"));
+        if (logoutButton.isDisplayed()){
+            logoutButton.click();
+        }
     }
 }
