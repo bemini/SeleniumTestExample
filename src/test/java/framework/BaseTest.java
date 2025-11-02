@@ -1,21 +1,40 @@
 package framework;
 
 import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
-import static com.codeborne.selenide.Selenide.open;
-import static framework.ConstantValues.*;
+import static framework.BrowserOptions.options;
 
-public class BaseTest {
+public class BaseTest{
+    protected WebDriver driver;
 
-    public void setUp(WebDriver driver){
-        WebDriverRunner.setWebDriver(driver); // bind to Selenide
-        open(TARGET_URL);
+    @BeforeMethod(alwaysRun = true)
+    public void setUp() {
+        if (driver == null) {
+            String browser = System.getProperty("browser", "chrome").toLowerCase();
+            switch (browser) {
+                case "firefox": driver = new FirefoxDriver(); break;
+                case "edge": driver = new EdgeDriver(); break;
+                case "safari": driver = new SafariDriver(); break;
+                default: driver = new ChromeDriver(options()); break;
+            }
+            WebDriverRunner.setWebDriver(driver);
+            driver.manage().window().maximize();
+        }
+        driver.get("https://www.saucedemo.com/");
     }
 
-    public void tearDown(WebDriver driver){
-        //Logout
-        LoginPage.logout(driver);
-        driver.manage().deleteAllCookies();
+    @AfterMethod(alwaysRun = true)
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+            driver = null;
+        }
     }
 }

@@ -1,13 +1,8 @@
-package saucedemoTests;
+package sauceDemoTests;
 
 import framework.BaseTest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 
@@ -16,30 +11,16 @@ import java.util.*;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
-import static framework.BrowserOptions.options;
 import static framework.ConstantValues.*;
 import static framework.InventoryPage.*;
 import static framework.LoginPage.login;
 
 public class ProductListTest extends BaseTest {
 
-//    WebDriver driver = new FirefoxDriver();
-    WebDriver driver = new ChromeDriver(options());
-//    WebDriver driver = new EdgeDriver();
-//    WebDriver driver = new SafariDriver();
-
-    @BeforeClass
+    @BeforeMethod
     public void setupTest() {
-        super.setUp(driver);
+        super.setUp();
         login(STANDARD_USER,PASSWORD );
-    }
-
-    @AfterTest
-    public void tearDownTest(){
-        super.tearDown(driver);
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
     //Check that the entire products list is captured

@@ -1,14 +1,8 @@
-package saucedemoTests;
+package sauceDemoTests;
 
 import framework.BaseTest;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -19,30 +13,16 @@ import static framework.ConstantValues.*;
 import static framework.InventoryPage.addAllItemstoCart;
 import static framework.LoginPage.login;
 import static framework.ShoppingCartList.*;
-import static framework.BrowserOptions.*;
 
 public class CheckoutTest extends BaseTest {
 
-//    WebDriver driver = new FirefoxDriver();
-    WebDriver driver = new ChromeDriver(options());
-//    WebDriver driver = new EdgeDriver();
-//    WebDriver driver = new SafariDriver();
-
-    @BeforeTest
+    @BeforeMethod
     public void setupTest(){
-        super.setUp(driver);
+        super.setUp();
         login(STANDARD_USER, PASSWORD);
 
         addAllItemstoCart(driver);
         navigateToShoppingCartList(driver);
-    }
-
-    @AfterTest
-    public void tearDownTest(){
-        super.tearDown(driver);
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
     @Test

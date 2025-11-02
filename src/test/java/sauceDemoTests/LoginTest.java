@@ -1,41 +1,20 @@
-package saucedemoTests;
+package sauceDemoTests;
 
 import framework.BaseTest;
 import static framework.LoginPage.login;
 
 import framework.LoginPage;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static framework.ConstantValues.*;
-import static framework.BrowserOptions.*;
 
 public class LoginTest extends BaseTest {
 
-//    WebDriver driver = new FirefoxDriver();
-
-    WebDriver driver = new ChromeDriver(options());
-//    WebDriver driver = new EdgeDriver();
-//    WebDriver driver = new SafariDriver();
-
     @BeforeClass
     public void setupTest() {
-        super.setUp(driver);
-    }
-
-    @AfterTest
-    public void tearDownTest(){
-        super.tearDown(driver);
-        if (driver != null) {
-            driver.quit();
-        }
+        super.setUp();
     }
 
     @Test
