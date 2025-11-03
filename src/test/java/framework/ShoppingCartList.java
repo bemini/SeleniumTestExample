@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static framework.InventoryPage.*;
 import static framework.ConstantValues.*;
@@ -26,7 +28,7 @@ public class ShoppingCartList {
         return prices;
     }
 
-    public static void navigateToShoppingCartList(WebDriver driver){
+    public static void clickShoppingCartButton(WebDriver driver){
         driver.findElement(By.className(SHOPPING_CART)).click();
     }
 
@@ -38,26 +40,56 @@ public class ShoppingCartList {
         return totalItemPrice;
     }
 
-    public static void clickCheckout(WebDriver driver){
-        WebElement checkoutButton = driver.findElement(By.xpath("//button[text()='Checkout']"));
+    public static void clickCheckoutButton(WebDriver driver){
+        WebElement checkoutButton = driver.findElement(CHECKOUT_BUTTON);
         checkoutButton.click();
     }
 
-    public static double calculateTotal(List<Double>cartItemsList, Double taxRate){
-        Double totalItemPrice = 0.00;
-        for (Double price : cartItemsList){
-            totalItemPrice += price;
+    public static float calculateTotal(float itemTotal){
+        float tax = itemTotal * 0.08F;
+        return itemTotal + tax;
+    }
+
+    public static float displayedTotal (WebDriver driver){
+        WebElement totalElement = driver.findElement(SUMMARY_TOTAL);
+        String totalText = totalElement.getText().trim().replaceAll("\\s+", " ");
+
+        // --- Extract numeric part ---
+        Pattern pattern = Pattern.compile("\\d+\\.\\d+");
+        Matcher matcher = pattern.matcher(totalText);
+
+        float displayedTotal = 0.0F;
+        if (matcher.find()) {
+            displayedTotal = Float.parseFloat(matcher.group());
+        } else {
+            throw new AssertionError("No numeric total found in text: " + totalText);
         }
-        return totalItemPrice * (1 + taxRate);
+
+        return  displayedTotal;
     }
 
     public static void clickCancleButton(WebDriver driver){
-        WebElement cancleButton = driver.findElement(By.xpath("//button[text()='Cancel']"));
+        WebElement cancleButton = driver.findElement(CANCEL_SHOPPING);
         cancleButton.click();
     }
 
-    public static void clickContinueShopping(WebDriver driver){
-        WebElement continueShoppingButton = driver.findElement(By.xpath("//button[text()='Continue Shopping']"));
+    public static void clickContinueShoppingButton(WebDriver driver){
+        WebElement continueShoppingButton = driver.findElement(CONTINUE_SHOPPING_BUTTON);
         continueShoppingButton.click();
+    }
+
+    public static void clickContinueButton(WebDriver driver){
+        WebElement continueButton = driver.findElement(CONTINUE_BUTTON);
+        continueButton.click();
+    }
+
+    public static void clickFinishButton(WebDriver driver){
+        WebElement continueButton = driver.findElement(FINISH_BUTTON);
+        continueButton.click();
+    }
+
+    public static void clickHomeButton(WebDriver driver){
+        WebElement continueButton = driver.findElement(BACK_HOME);
+        continueButton.click();
     }
 }

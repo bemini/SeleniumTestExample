@@ -35,10 +35,23 @@ public class ConstantValues {
     //Shopping Cart Page ID's
     public static final By SHOPPING_CART_BADGE = By.className("shopping_cart_badge");
     public static final String SHOPPING_CART_ITEMS = "cart_item";
+    public static final By CHECKOUT_BUTTON = By.xpath("//button[text()='Checkout']");
+    public static final By CONTINUE_SHOPPING_BUTTON = By.xpath("//button[text()='Continue Shopping']");
+
+    //Client Information ID's
+    public static final By FIRST_NAME = By.id("first-name");
+    public static final By LAST_NAME = By.id("last-name");
+    public static final By POSTAL_CODE = By.id("postal-code");
+    public static final By CONTINUE_BUTTON = By.id("continue");
+    public static final By CANCEL_SHOPPING = By.xpath("//button[text()='Cancel']");
+    public static final By FINISH_BUTTON = By.xpath("//button[text()='Finish']");
+    public static final By SUMMARY_TOTAL = By.xpath("//div[@class='summary_total_label']");
+    public static final By FINISHED_HEADER = By.className("complete-header");
+    public static final By BACK_HOME = By.xpath("//button[text()='Back Home']");
 
     //Accessible ID's on sidebar Menu
     public static final By MENU_BUTTON = By.id("react-burger-menu-btn");
-    public static final String LOGOUT =  "//*[text()='Logout']";
+    public static final String LOGOUT_BUTTON =  "//*[text()='Logout']";
 
 
 }
