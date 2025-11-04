@@ -24,7 +24,7 @@ public class ShoppingCartTest extends BaseTest {
         login(STANDARD_USER, PASSWORD);
 
         addAllItemstoCart(driver);
-        navigateToShoppingCartList(driver);
+        clickShoppingCartButton(driver);
     }
 
     @Test
